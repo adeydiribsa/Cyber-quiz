@@ -60,7 +60,8 @@ try:
 except Exception:
     logo = None
 
-screen_width = st.experimental_get_query_params().get("screen_width", [0])[0]
+# Use new API
+screen_width = st.query_params.get("screen_width", [0])[0]
 
 # Simple mobile stack (or desktop columns)
 if logo:
