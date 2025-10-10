@@ -57,7 +57,7 @@ questions = [
 ]
 
 # ---- Google Apps Script Webhook URL ----
-WEBHOOK_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE"
+WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzeJ_rRRqHnhGlSee4ZEH3PMVA2Q5KZi5KfeDbog18m0pok7ISjB8Q4YxesbhTM_YWD/exec"
 
 # ---- Quiz Form ----
 with st.form('quiz_form'):
