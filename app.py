@@ -114,7 +114,8 @@ if submitted:
     # ---- Attempt Google Sheet submission ----
     success = False
     try:
-        response = requests.post(WEBHOOK_URL, json=payload, timeout=5)
+        response = requests.post(WEBHOOK_URL, json=payload, timeout=20
+                                )
         if response.status_code == 200:
             st.success("✅ Your response has been recorded successfully in VisionFund’s secure Google Sheet.")
             success = True
