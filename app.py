@@ -79,8 +79,29 @@ if submitted:
     st.write('**Practical tips:**')
     for t in tips[most_common]:
         st.write('- ' + t)
-    import csv, datetime
-    save_path = 'responses.csv'
+    import requests, datetime, json
+
+    webhook_url = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE"
+
+    payload = {
+        "name": user_name,
+        "department": dept,
+        "q1": answers[0],
+        "q2": answers[1],
+        "q3": answers[2],
+        "q4": answers[3],
+        "persona": persona_title
+    }
+    
+    try:
+        response = requests.post(webhook_url, json=payload)
+        if response.status_code == 200:
+            st.success("✅ Your response has been recorded successfully in VisionFund’s secure Google Sheet.")
+        else:
+            st.warning("⚠️ Submitted, but could not reach the central database. Please notify IT.")
+    except Exception as e:
+        st.error("❌ Could not connect to the Google Sheet endpoint.")
+
     header = ['timestamp','name','department','q1','q2','q3','q4','persona']
     row = [datetime.datetime.utcnow().isoformat(), user_name, dept] + answers + [persona_title]
     write_header = not os.path.exists(save_path)
