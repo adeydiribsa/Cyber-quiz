@@ -9,27 +9,74 @@ import json
 
 st.set_page_config(page_title='VisionFund Cyber Persona Quiz', page_icon=':shield:', layout='centered')
 
-# ---- Branding & styles ----
 primary_color = '#FF6600'
-st.markdown(f"""<style>
-    .stApp {{background-color: white;}}
-    .title {{color: {primary_color}; font-size:36px; font-weight:600;}}
-    .persona {{background-color:#f7f7f7; padding:12px; border-radius:8px;}}
-    .footer {{color: {primary_color}; font-size:12px; text-align:center; margin-top:20px;}}
-</style>""", unsafe_allow_html=True)
+
+# ---- Responsive CSS ----
+st.markdown(f"""
+<style>
+.stApp {{background-color: white;}}
+.title {{
+    color: {primary_color};
+    font-size:36px;
+    font-weight:600;
+    word-wrap: break-word;
+    text-align: left;
+}}
+.persona {{
+    background-color:#FFF5E6;
+    padding:20px;
+    border-radius:12px;
+    font-size:16px;
+    word-wrap: break-word;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}}
+.tip-card {{
+    background-color:#FFF8F0;
+    border-left: 4px solid {primary_color};
+    padding:12px;
+    margin-bottom:8px;
+    border-radius:8px;
+    font-size:14px;
+}}
+.footer {{
+    color: {primary_color};
+    font-size:12px;
+    text-align:center;
+    margin-top:20px;
+}}
+
+@media only screen and (max-width: 600px) {{
+    .title {{font-size:24px; text-align:center;}}
+    .persona {{font-size:14px; padding:15px;}}
+    .tip-card {{font-size:13px; padding:10px;}}
+}}
+</style>
+""", unsafe_allow_html=True)
 
 # ---- Header ----
-col1, col2 = st.columns([1,3])
-with col1:
-    try:
-        logo = Image.open('logo.jpg')
-        st.image(logo, width=120)
-    except Exception:
-        st.write('')
-with col2:
-    st.markdown('<div class="title">YOU Make the Difference in Cybersecurity</div>', unsafe_allow_html=True)
-    st.markdown('### VisionFund MFI — Cyber Persona Quiz')
+try:
+    logo = Image.open('logo.jpg')
+except Exception:
+    logo = None
 
+screen_width = st.experimental_get_query_params().get("screen_width", [0])[0]
+
+# Simple mobile stack (or desktop columns)
+if logo:
+    if int(screen_width) < 600:
+        st.image(logo, width=100)
+        st.markdown('<div class="title">YOU Make the Difference in Cybersecurity</div>', unsafe_allow_html=True)
+    else:
+        col1, col2 = st.columns([1,3])
+        with col1:
+            st.image(logo, width=120)
+        with col2:
+            st.markdown('<div class="title">YOU Make the Difference in Cybersecurity</div>', unsafe_allow_html=True)
+else:
+    st.markdown('<div class="title">YOU Make the Difference in Cybersecurity</div>', unsafe_allow_html=True)
+
+st.markdown('### VisionFund MFI — Cyber Persona Quiz')
 st.write('---')
 
 # ---- Quiz Questions ----
@@ -57,7 +104,7 @@ questions = [
 ]
 
 # ---- Google Apps Script Webhook URL ----
-WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwJwxV-0AaL0GgUYgxcWK3LwiQOFk3Cu4PL_k0lCAKS2NLostJLEMz6y0d0g3dPyt9U/exec"
+WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz5PkadsuYGR5WxobVnQ8OiOZYFZhFbpadX46wJrULQy-YrzTGuQlJXKhPztXZBgy_S/exec"
 
 # ---- Quiz Form ----
 with st.form('quiz_form'):
@@ -86,21 +133,25 @@ if submitted:
     persona_title, persona_desc = persona_map[most_common]
 
     # ---- Display Persona ----
-    st.success(f"Hi {user_name or 'Participant'} — your primary Cyber Persona is: {persona_title}")
+    st.success(f"Hi {user_name or 'Participant'} — your primary Cyber Persona is:")
     st.markdown(f"<div class='persona'><strong>{persona_title}</strong><br/>{persona_desc}</div>", unsafe_allow_html=True)
 
     # ---- Practical Tips ----
     tips = {
-        'A': ['Keep verifying sources and encourage others to question suspicious requests.', 'Share tips on investigating messages.'],
-        'B': ['Keep reporting and be a role model for your team.', 'Help colleagues know how to escalate suspicious items.'],
-        'C': ['Use your analytical skills to improve team defenses.', 'Share patterns you observe in phishing attempts.'],
-        'D': ['Balance quick action with verification to avoid accidental disruption.', 'Document incidents to help the team learn.']
+        'A': ['Keep verifying sources and encourage others to question suspicious requests.', 
+              'Share tips on investigating messages.'],
+        'B': ['Keep reporting and be a role model for your team.', 
+              'Help colleagues know how to escalate suspicious items.'],
+        'C': ['Use your analytical skills to improve team defenses.', 
+              'Share patterns you observe in phishing attempts.'],
+        'D': ['Balance quick action with verification to avoid accidental disruption.', 
+              'Document incidents to help the team learn.']
     }
     st.write('**Practical tips:**')
     for t in tips[most_common]:
-        st.write('- ' + t)
+        st.markdown(f"<div class='tip-card'>{t}</div>", unsafe_allow_html=True)
 
-    # ---- Prepare Payload for Google Sheet ----
+    # ---- Prepare payload for Google Sheet ----
     payload = {
         "name": user_name,
         "department": dept,
@@ -114,13 +165,12 @@ if submitted:
     # ---- Attempt Google Sheet submission ----
     success = False
     try:
-        response = requests.post(WEBHOOK_URL, json=payload, timeout=20
-                                )
+        response = requests.post(WEBHOOK_URL, json=payload, timeout=5)
         if response.status_code == 200:
             st.success("✅ Your response has been recorded successfully in VisionFund’s secure Google Sheet.")
             success = True
         else:
-            st.warning("⚠️ Submitted, but could not reach the central database. Saving locally.")
+            st.warning("⚠️ Could not reach Google Sheet. Saving locally.")
     except Exception:
         st.warning("⚠️ Could not connect to Google Sheet. Saving your response locally.")
 
@@ -137,7 +187,7 @@ if submitted:
             writer.writerow(row)
         st.info("💾 Your response has been saved locally as a fallback.")
 
-    # ---- Admin option to download local CSV ----
+    # ---- Admin download ----
     if st.checkbox('Show admin options'):
         st.markdown('**Admin: Download all responses**')
         try:
