@@ -81,7 +81,7 @@ if submitted:
         st.write('- ' + t)
     import requests, datetime, json
 
-    webhook_url = https://script.google.com/macros/s/AKfycbzeJ_rRRqHnhGlSee4ZEH3PMVA2Q5KZi5KfeDbog18m0pok7ISjB8Q4YxesbhTM_YWD/exec
+    webhook_url = "https://script.google.com/macros/s/AKfycbzeJ_rRRqHnhGlSee4ZEH3PMVA2Q5KZi5KfeDbog18m0pok7ISjB8Q4YxesbhTM_YWD/exec"
 
     payload = {
         "name": user_name,
