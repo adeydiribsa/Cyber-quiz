@@ -59,8 +59,10 @@ try:
 except Exception:
     logo = None
 
+# Use new API
 screen_width = st.query_params.get("screen_width", [0])[0]
 
+# Simple mobile stack (or desktop columns)
 if logo:
     if int(screen_width) < 600:
         st.image(logo, width=100)
@@ -133,11 +135,11 @@ with st.form('quiz_form'):
         "Q4: Cyber Awareness Meeting"
     ]
 
-    for i, (q, opts) in enumerate(questions, start=0):
+    for i, (q, opts) in enumerate(questions, start=1):
         # Bold only the question title
         st.markdown(f"**{question_titles[i]}**: {q}", unsafe_allow_html=True)
         ans = st.radio("", options=opts, key=f'q{i+1}', index=0, horizontal=False)
-        answers.append(ans)
+        answers.append(ans[0])
         # Add spacing after each question
         st.markdown("<br>", unsafe_allow_html=True)
 
