@@ -90,17 +90,17 @@ st.write('---')
 
 # ---- Quiz Questions ----
 questions = [
-    ("You receive an urgent message from a regional office reporting a potential security issue affecting customer or employee data. What’s your first action as a leader?",
-     ['A) Verify facts before taking any public or operational action',
-      'B) Gather the incident response and communications teams immediately',
-      'C) Consider the possible causes and long-term lessons',
-      'D) Make a quick decision to contain the issue and reassure others']),
+    ("You are informed that the organization may face a cyber-related disruption affecting operations or customers. What is your first step as a senior leader?",
+     ['A) Assess the situation carefully, gather facts from relevant teams, and consider potential impacts before acting',
+      'B) Call an immediate leadership meeting to align on response strategy and communication plans',
+      'C) Review organizational policies and risk management frameworks to guide next steps',
+      'D) Make quick decisions to contain potential disruption while monitoring updates']),
     
-    ("A vendor handling customer/employee data reports a potential data leak (e.g., Microsoft 365). You…",
-     ['A) Request detailed evidence and validate the report independently',
-      'B) Escalate to legal, compliance, and communications teams right away',
-      'C) Review vendor agreements for security clauses and obligations',
-      'D) Suspend data exchange until confirmed safe']),
+    ("A key vendor or partner reports a potential risk affecting their services or data management. As a senior leader, how do you respond?",
+     ['A) Request an overview of the situation and validate the information before making decisions',
+      'B) Escalate immediately to relevant management teams to coordinate response and communication',
+      'C) Evaluate potential impact on operations, reputation, and compliance before taking action',
+      'D) Temporarily adjust business processes or service dependencies while awaiting confirmation']),
     
     ("A staff member reports receiving a suspicious email claiming to be from your office. How do you handle it?",
      ['A) Ask for more details to understand what happened',
