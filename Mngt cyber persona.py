@@ -139,7 +139,7 @@ with st.form('quiz_form'):
         ans = st.radio("", options=opts, key=f'q{i+1}', index=0, horizontal=False)
         answers.append(ans)
         # Add spacing after each question
-        #st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
 
     submitted = st.form_submit_button('Submit')
 
