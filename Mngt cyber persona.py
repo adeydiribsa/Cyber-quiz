@@ -74,7 +74,7 @@ if logo:
 else:
     st.markdown('<div class="title">YOU Make the Difference in Cybersecurity</div>', unsafe_allow_html=True)
 
-st.markdown('### VisionFund MFI — Senior Management Cyber Leadership Quiz')
+st.markdown('### VisionFund MFI — Senior Management Cybersecurity Awareness Quiz')
 
 # ---- Introduction ----
 st.write('---')
@@ -82,42 +82,42 @@ st.markdown("""
 ### 🧭 Discover Your Cyber Leadership Style
 
 Cybersecurity is not just an IT concern — it’s a leadership responsibility.  
-This quick reflection helps you see **how your decision-making style** supports a strong culture of security and trust.  
+This short reflection helps you see **how your leadership style** supports a strong culture of security awareness and trust.  
 
-There are no right or wrong answers — each style brings value to how VisionFund protects its people and data.  
-Answer honestly, and see which **Cyber Leadership Persona** best reflects you.
+There are no right or wrong answers — each style contributes to VisionFund’s resilience and protection of people and data.  
+Answer honestly and discover your **Cyber Leadership Persona**.
 """)
 st.write('---')
 
-# ---- Quiz Questions (Non-Technical Leadership-Focused) ----
+# ---- Quiz Questions ----
 questions = [
-    ("You receive news that one of your branches is facing a potential security issue affecting customer data. What’s your first action as a leader?",
-     ['A) Ask questions to understand the full situation before responding',
-      'B) Bring together the right teams to handle communication and response',
-      'C) Think through the possible causes and long-term lessons',
+    ("You receive an urgent message from a regional office reporting a potential security issue affecting customer or employee data. What’s your first action as a leader?",
+     ['A) Verify facts before taking any public or operational action',
+      'B) Gather the incident response and communications teams immediately',
+      'C) Consider the possible causes and long-term lessons',
       'D) Make a quick decision to contain the issue and reassure others']),
     
-    ("An unfamiliar organization emails you asking for partnership details and financial information. You…",
-     ['A) Verify the source and confirm if it’s legitimate before replying',
-      'B) Notify your communications or compliance team for review',
-      'C) Reflect on how similar requests have been handled in the past',
-      'D) Choose not to respond and move on quickly']),
+    ("A vendor handling customer/employee data reports a potential data leak (e.g., Microsoft 365). You…",
+     ['A) Request detailed evidence and validate the report independently',
+      'B) Escalate to legal, compliance, and communications teams right away',
+      'C) Review vendor agreements for security clauses and obligations',
+      'D) Suspend data exchange until confirmed safe']),
     
     ("A staff member reports receiving a suspicious email claiming to be from your office. How do you handle it?",
      ['A) Ask for more details to understand what happened',
       'B) Appreciate the report and encourage others to do the same',
-      'C) Think about what this incident says about awareness in the team',
+      'C) Think about what this incident says about team awareness',
       'D) Tell them to delete it immediately and stay alert']),
     
     ("You’re preparing for a management meeting on cybersecurity awareness. Your approach is to…",
      ['A) Review real examples to ask thoughtful questions',
       'B) Encourage open discussion and teamwork on the topic',
-      'C) Focus on what can be improved in current practices',
+      'C) Focus on improving current practices',
       'D) Keep it brief and practical with clear next steps'])
 ]
 
 # ---- Google Apps Script Webhook URL ----
-WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzTZmYJbaGx4oYEo4eXOK5_2IFZMHdd8zE8B9Qbajqc9ibv1b7-7Lr0X1RJkbp7QbYs/exec"
+WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwpnBWfB3bhVwvNyhRqxqV9TCnesQDuurVtLLQfk42Bkcd4zIYxByGDP8TcFVzLYJtw/exec"
 
 # ---- Quiz Form ----
 with st.form('quiz_form'):
@@ -136,16 +136,16 @@ if submitted:
     order = ['A','B','C','D']
     most_common = sorted(order, key=lambda x: (-counts[x], order.index(x)))[0]
 
-    # ---- Persona Map (Leadership-Focused) ----
+    # ---- Persona Map (Cybersecurity Awareness) ----
     persona_map = {
-        'A': ('The Thoughtful Leader 🕵️', 
-              'You take time to understand before acting. Calm, analytical, and trusted for your balanced judgment.'),
-        'B': ('The Collaborator 🛡', 
-              'You believe in teamwork and open communication. You build confidence by keeping everyone informed and involved.'),
-        'C': ('The Visionary ♟', 
-              'You focus on lessons and long-term improvement. You see patterns others miss and guide the organization toward growth.'),
-        'D': ('The Decisive Driver 🚀', 
-              'You act quickly and confidently in moments of uncertainty. You inspire others through clear direction and momentum.')
+        'A': ('The Insightful Leader 🕵️', 
+              'You carefully assess cybersecurity risks before acting. Your thoughtful approach ensures decisions protect people, data, and operations.'),
+        'B': ('The Connector 🛡', 
+              'You foster collaboration and communication around cyber risks. Your team trusts you to coordinate awareness and encourage reporting of suspicious activities.'),
+        'C': ('The Strategist ♟', 
+              'You focus on long-term cyber resilience. You anticipate potential threats and guide the organization to strengthen policies and awareness initiatives.'),
+        'D': ('The Action-Oriented Driver 🚀', 
+              'You act quickly to address potential cyber threats. Your decisiveness helps contain risks and reinforces a culture of immediate reporting and proactive action.')
     }
 
     persona_title, persona_desc = persona_map[most_common]
@@ -154,23 +154,23 @@ if submitted:
     st.success(f"Hi {user_name or 'Leader'} — your Cyber Leadership Persona is:")
     st.markdown(f"<div class='persona'><strong>{persona_title}</strong><br/>{persona_desc}</div>", unsafe_allow_html=True)
 
-    # ---- Practical Tips for Leaders ----
+    # ---- Practical Tips (Cybersecurity Awareness) ----
     tips = {
         'A': [
-            'Continue asking thoughtful questions before taking action — your calm approach builds confidence during pressure.',
-            'Balance careful thinking with timely decisions to keep momentum when it matters most.'
+            'Before reacting to cyber incidents, assess the situation carefully and verify information — this reduces risk of missteps.',
+            'Encourage your team to question suspicious requests or emails; model cautious decision-making.'
         ],
         'B': [
-            'Keep encouraging your teams to share information — it builds a culture of transparency and trust.',
-            'Recognize and reward people who report issues early; that openness strengthens the whole organization.'
+            'Promote open communication about cyber risks — create a safe space for reporting suspicious activities.',
+            'Recognize and reinforce team members who follow security best practices; this fosters a culture of accountability.'
         ],
         'C': [
-            'Share insights from past challenges to help others see the bigger picture.',
-            'Encourage proactive learning — your forward-thinking mindset shapes better decisions at every level.'
+            'Share insights on past incidents to educate the team and improve awareness.',
+            'Support proactive cybersecurity training and policies; help the organization anticipate future threats.'
         ],
         'D': [
-            'Your decisiveness is a strength — pair it with reflection afterward to capture key lessons.',
-            'Model clear communication when making fast calls so others stay aligned and confident.'
+            'Respond promptly to potential threats while communicating clearly with the team to maintain trust.',
+            'After urgent actions, review outcomes to capture key lessons for continuous improvement.'
         ]
     }
 
