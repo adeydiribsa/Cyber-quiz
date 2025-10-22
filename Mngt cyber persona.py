@@ -80,8 +80,7 @@ st.markdown('### VisionFund MFI — Senior Management Cybersecurity Awareness Qu
 st.write('---')
 st.markdown("""
 ### 🧭 Discover Your Cyber Leadership Style
-
-Cybersecurity is not just an IT concern — it’s a leadership responsibility.  
+  
 This short reflection helps you see **how your leadership style** supports a strong culture of security awareness and trust.  
 
 There are no right or wrong answers — each style contributes to VisionFund’s resilience and protection of people and data.  
