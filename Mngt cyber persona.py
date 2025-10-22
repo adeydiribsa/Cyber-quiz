@@ -126,23 +126,9 @@ with st.form('quiz_form'):
     user_name = st.text_input('Your name (optional)')
     dept = st.text_input('Department (optional)')
     answers = []
-
-    # Titles for each question
-    question_titles = [
-        "Q1: Cyber Risk Oversight",
-        "Q2: Vendor / Third-Party Risk",
-        "Q3: Staff Report Handling",
-        "Q4: Cyber Awareness Meeting"
-    ]
-
     for i, (q, opts) in enumerate(questions, start=1):
-        # Bold only the question title
-        st.markdown(f"**{question_titles[i]}**: {q}", unsafe_allow_html=True)
-        ans = st.radio("", options=opts, key=f'q{i+1}', index=0, horizontal=False)
+        ans = st.radio(f'Q{i}. {q}', options=opts, key=f'q{i}')
         answers.append(ans[0])
-        # Add spacing after each question
-        st.markdown("<br>", unsafe_allow_html=True)
-
     submitted = st.form_submit_button('Submit')
 
 
