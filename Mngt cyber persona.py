@@ -108,7 +108,7 @@ questions = [
       'C) Think about what this incident says about team awareness',
       'D) Tell them to delete it immediately and stay alert']),
     
-    ("You’re preparing for a management meeting on cybersecurity awareness. Your approach is to…",
+    ("You were preparing for a management meeting on cybersecurity awareness. Your approach was to…",
      ['A) Review real examples to ask thoughtful questions',
       'B) Encourage open discussion and teamwork on the topic',
       'C) Focus on improving current practices',
