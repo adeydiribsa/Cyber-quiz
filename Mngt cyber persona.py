@@ -134,10 +134,16 @@ with st.form('quiz_form'):
     ]
 
     for i, (q, opts) in enumerate(questions, start=0):
-        st.markdown(f"**{question_titles[i]}: {q}**")
-        ans = st.radio("", options=opts, key=f'q{i+1}')
+        # Bold only the question title
+        st.markdown(f"**{question_titles[i]}**: {q}", unsafe_allow_html=True)
+        ans = st.radio("", options=opts, key=f'q{i+1}', index=0, horizontal=False)
         answers.append(ans)
+        # Add spacing after each question
+        st.markdown("<br>", unsafe_allow_html=True)
+
     submitted = st.form_submit_button('Submit')
+
+
 
 
 # ---- Submission Logic ----
